@@ -1,10 +1,11 @@
 # Default Values
 # Defines number of rows to be generated in the CSV File
-number_of_rows: 3
+number_of_rows: 1
 file_name: askari-bank
 available_field: [account_holder_name, address, ifsc_code, micr_code, branch_name,
-  account_type, opening_balance, closing_balance, debit, credit, date, total_balance]
-target_field: [account_holder_name, address, account_type]
+  account_type, account_number, opening_balance, closing_balance, debit, credit, date,
+  total_balance]
+target_field: [account_holder_name, address, account_type, account_number]
 default:
   account_holder_name: MUKHTAR AHMAD BASHIR AHMAD
   address: "Chak No.55/DB Yazman\nDistrict Bahawalpur\nPakistan\n"
@@ -33,6 +34,6 @@ address:
       # Default and only value for India is "single"
   address_line: single
   wrong_state: false
-  pincode_length: 10
+  pincode_length: 5
   has_pincode: false
-  no_gap_address: true
+  no_gap_address: false

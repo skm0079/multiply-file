@@ -2,8 +2,8 @@
 # Defines number of rows to be generated in the CSV File
 number_of_rows: 3
 file_name: "askari-bank"
-available_field: [account_holder_name,address,ifsc_code,micr_code,branch_name,account_type,opening_balance,closing_balance,debit,credit,date,total_balance]
-target_field: [account_holder_name,address,account_type]
+available_field: [account_holder_name,address,ifsc_code,micr_code,branch_name,account_type,account_number,opening_balance,closing_balance,debit,credit,date,total_balance]
+target_field: [account_holder_name,address,account_type,account_number]
 default: 
     account_holder_name: ""
     address: ""
@@ -40,7 +40,7 @@ address:
       # True or False
     wrong_state: False 
       # Length of the Pin Code , default: , else use other lengths 3 upto 5
-    pincode_length: 10
+    pincode_length: 5
       # Should have Pincode? True / False
     has_pincode: False
       # Gap between address True / False

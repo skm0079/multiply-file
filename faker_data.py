@@ -77,8 +77,15 @@ def validate_address(address_line='single', wrong_state=False, pincode_length=5,
         address_data = f"{address}\n{state}, {pincode}"
     else:
         address_data = f"{address}\n{state}"
-    print(re.sub(r"[\n\t\s]*", "", address_data))
-    return re.sub(r"[\n\t\s]*", "", address_data) if not no_gap_address else address_data
+    
+    # print(re.sub(r"[\n\t\s]*", "", address_data))
+
+    if no_gap_address:
+        address = re.sub(r"[\n\t\s]*", "", address_data)
+    else:
+        address = address_data
+
+    return address
 
 
 # Function to validate IFSC code field
