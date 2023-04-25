@@ -11,8 +11,8 @@ __pycache__/
 docx_templates/
 excel_sheets/
 
-output_docs
-output_pdfs
+output_docs/
+output_pdfs/
 
 
 # Distribution / packaging
