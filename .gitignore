@@ -6,6 +6,15 @@ __pycache__/
 # C extensions
 *.so
 
+# Other Exclusions
+
+docx_templates/
+excel_sheets/
+
+output_docs
+output_pdfs
+
+
 # Distribution / packaging
 .Python
 build/
