@@ -47,8 +47,9 @@ def validate_account_holder_name(case, length, gap, dot, title):
     return name
 
 # Function to validate address field
-def validate_address(address_line='single', wrong_state=False):
+def validate_address(address_line='single', wrong_state=False, pincode_length=5):
      # Generate the address line based on the input parameter
+     # This Logic is Only valid for default Locale
     if address_line == 'single':
         address = fake.street_address()
     elif address_line == 'double':
@@ -62,12 +63,12 @@ def validate_address(address_line='single', wrong_state=False):
 
     # Generate the state name, potentially with a wrong name if the input parameter is True
     if wrong_state:
-        state = "WrongState"
+        state = fake.state()
     else:
         state = fake.state()
 
     # Generate a pincode of length 5
-    pincode = fake.postcode()[:5]
+    pincode = fake.postcode()[:pincode_length]
 
     # Format the address data as a string and return it
     address_data = f"{address}\n{state}, {pincode}"
@@ -87,6 +88,12 @@ def validate_micr_code():
 def validate_branch_name():
     # Validation rules go here
     return fake.company()
+
+# Function to validate branch name field
+def validate_account_number():
+    # Validation rules go here
+    account_number = fake.swift()
+    return account_number
 
 # Function to validate account type field
 def validate_account_type():
@@ -141,7 +148,7 @@ num_no_title_names = input_data['account_holder_name']['no_title_names']
 # Generate CSV file with random data
 with open(f"excel_sheets/{input_data['file_name']}_accounts.csv", mode='w', newline='') as file:
     writer = csv.writer(file)
-    writer.writerow(['account_holder_name', 'address', 'ifsc_code', 'micr_code', 'branch_name', 'account_type', 'opening_balance', 'closing_balance', 'debit', 'credit', 'date', 'total_balance'])
+    writer.writerow(['account_holder_name', 'address', 'ifsc_code', 'micr_code', 'branch_name', 'account_type', 'account_number', 'opening_balance', 'closing_balance', 'debit', 'credit', 'date', 'total_balance'])
 
     for i in range(num_rows):
         if 'account_holder_name' in input_data['target_field']:
@@ -195,6 +202,11 @@ with open(f"excel_sheets/{input_data['file_name']}_accounts.csv", mode='w', newl
             account_type = validate_account_type()
         else:
             account_type = input_data['default']['account_type']
+
+        if 'account_number' in input_data['target_field']:
+            account_number = validate_account_number()
+        else:
+            account_number = input_data['default']['account_number']
         
         if 'opening_balance' in input_data['target_field']:
             opening_balance = generate_opening_balance()
@@ -226,4 +238,4 @@ with open(f"excel_sheets/{input_data['file_name']}_accounts.csv", mode='w', newl
         else:
             total_balance = input_data['default']['total_balance']
         
-        writer.writerow([account_holder_name, address, ifsc_code, micr_code, branch_name, account_type, opening_balance, closing_balance, debit, credit, date, total_balance])
+        writer.writerow([account_holder_name, address, ifsc_code, micr_code, branch_name, account_type, account_number, opening_balance, closing_balance, debit, credit, date, total_balance])

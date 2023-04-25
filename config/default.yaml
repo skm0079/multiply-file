@@ -15,58 +15,67 @@ askari-bank:
     credit: "23,862.72"
     date: ""
     total_balance: "32,978.69"
+    account_number: ""
+    
 axis-bank: 
-    account_holder_name: ""
-    address: ""
+    account_holder_name: "THANIGAIVEL BHEEMARAJ S"
+    address: |
+        NO 11 NEELAMEGAM STREET KAMARAJ NAGAR AVADI
+        CHENNAI
+        TAMIL NADU-INDIA 600071
     ifsc_code: ""
     micr_code: ""
     branch_name: ""
-    account_type: ""
-    opening_balance: ""
-    closing_balance: ""
-    debit: ""
-    credit: ""
+    account_type: "SALARY"
+    opening_balance: "345.08"
+    closing_balance: "200.00"
+    debit: "420366.35"
+    credit: "420221.27"
     date: ""
     total_balance: ""
+    account_number: ""
+
 hdfc-bank(1): 
-    account_holder_name: ""
-    address: ""
-    ifsc_code: ""
-    micr_code: ""
-    branch_name: ""
+    account_holder_name: "SANDEEP PRAMANIK"
+    address: |
+        T-501 SONAM NARMADA
+        NEW NAVGHAR ROAD
+        NR SONAM HEIGHTS
+        THANE 401105
+        MAHARASHTRA INDIA
+    ifsc_code: "HDFC0000060"
+    micr_code: "400240015"
+    branch_name: "FORT"
     account_type: ""
     opening_balance: ""
-    closing_balance: ""
+    closing_balance: "29,991.18"
     debit: ""
     credit: ""
     date: ""
     total_balance: ""
+    account_number: ""
+
 icici-bank(1): 
-    account_holder_name: ""
-    address: ""
-    ifsc_code: ""
-    micr_code: ""
-    branch_name: ""
-    account_type: ""
-    opening_balance: ""
-    closing_balance: ""
+    account_holder_name: "MR. YOGESH VIJAY PANGARE"
+    address: |
+        SARASWAT COLONY NAV NUTAN VASUNDHARA SOCIETY
+        BLOCK NO D14 DOMBIVLI E
+        MUMBAI
+        MAHARASHTRA - INDIA : 421201
+    ifsc_code: "ICIC0001196"
+    micr_code: "400229197"
+    branch_name: |
+        BLOCK B, GODREJ IT PARK,
+        P2 , PHIROJSHAH NAGAR, VIKHROLI (W), 400079
+    account_type: "Savings"
+    opening_balance: "20,202.00"
+    closing_balance: "25,134.00"
     debit: ""
     credit: ""
     date: ""
-    total_balance: ""
-icici-bank(2): 
-    account_holder_name: ""
-    address: ""
-    ifsc_code: ""
-    micr_code: ""
-    branch_name: ""
-    account_type: ""
-    opening_balance: ""
-    closing_balance: ""
-    debit: ""
-    credit: ""
-    date: ""
-    total_balance: ""
+    total_balance: "2,77,360.81"
+    account_number: "119601502551"
+
 MeinL-Bank: 
     account_holder_name: ""
     address: ""
@@ -80,32 +89,65 @@ MeinL-Bank:
     credit: ""
     date: ""
     total_balance: ""
+    account_number: ""
+icici-bank(2): 
+    account_holder_name: "MS.APOORVA MAHAJAN"
+    address: |
+        FLAT NO 132,SEC 10,NUOVO APARTMENT
+        PLOT NO 25,SOUTH WEST DELHI DWARKA 
+        DELHI
+        DELHI - INDIA - 110075
+    ifsc_code: "ICIC0001422"
+    micr_code: "560229050"
+    branch_name: |
+        BLOCK E, 
+        MANYATA - EMBASSY,BUSINESS PARK, 
+        OUTER RING ROAD,560045
+    account_type: "Savings"
+    opening_balance: ""
+    closing_balance: ""
+    debit: ""
+    credit: ""
+    date: ""
+    total_balance: "92,017.74"
+    account_number: "142201526600"
 MRMC: 
-    account_holder_name: ""
-    address: ""
+    account_holder_name: "Orlando Taylor"
+    address: |
+        587 Welsh Road
+        Canberra, ACT 2600
     ifsc_code: ""
     micr_code: ""
-    branch_name: ""
+    branch_name: "Canberra"
     account_type: ""
     opening_balance: ""
     closing_balance: ""
-    debit: ""
-    credit: ""
+    debit: "$40,899"
+    credit: "$45,244"
     date: ""
-    total_balance: ""
+    total_balance: "$53,775 CR"
+    account_number: "95715155"
 PNB-Bank-ok: 
-    account_holder_name: ""
-    address: ""
-    ifsc_code: ""
-    micr_code: ""
-    branch_name: ""
+    account_holder_name: "M/S. IGNOU /IGNOU/IGNOU"
+    address: |
+        IGNOU COMPLEX 
+        MAIDAN GARHI DELHI
+        DELHI - 110068 
+        INDIA
+    ifsc_code: "PUNB0225700"
+    micr_code: "110024121"
+    branch_name: |
+        DELHI NEW, IGNOU COMPLEX 
+        MAIDAN GARHI - 110068
     account_type: ""
     opening_balance: ""
     closing_balance: ""
     debit: ""
     credit: ""
     date: ""
-    total_balance: ""
+    total_balance: "19,62,11,399.87 Cr"
+    account_number: "2257000100014002"
+    
 Regions-Bank-Statement: 
     account_holder_name: ""
     address: ""
@@ -119,6 +161,7 @@ Regions-Bank-Statement:
     credit: ""
     date: ""
     total_balance: ""
+    account_number: ""
 sbh-bank: 
     account_holder_name: ""
     address: ""
@@ -132,6 +175,7 @@ sbh-bank:
     credit: ""
     date: ""
     total_balance: ""
+    account_number: ""
 sbi-bank: 
     account_holder_name: ""
     address: ""
@@ -145,6 +189,7 @@ sbi-bank:
     credit: ""
     date: ""
     total_balance: ""
+    account_number: ""
 sbi-ok: 
     account_holder_name: ""
     address: ""
@@ -158,6 +203,7 @@ sbi-ok:
     credit: ""
     date: ""
     total_balance: ""
+    account_number: ""
 TD-Bank: 
     account_holder_name: ""
     address: ""
@@ -171,3 +217,4 @@ TD-Bank:
     credit: ""
     date: ""
     total_balance: ""
+    account_number: ""

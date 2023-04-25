@@ -11,6 +11,7 @@ default:
     micr_code: ""
     branch_name: ""
     account_type: ""
+    account_number: ""
     opening_balance: ""
     closing_balance: ""
     debit: ""
@@ -33,7 +34,10 @@ account_holder_name:
       # Account holder names not have a title
     no_title_names: 1 
 address:
-      # Can Contain "single" or "double" or "three" or "four"
+      # Can Contain "single" or "double" or "three" or "four", Only valid on Default Locale
+      # Default and only value for India is "single"
     address_line: "single" 
       # True or False
     wrong_state: False 
+      # Length of the Pin Code , default: , else use other lengths 3 upto 5
+    pincode_length: 5
