@@ -2,6 +2,7 @@ import random
 import yaml
 import ruamel.yaml
 import csv
+import re
 from faker import Faker
 
 # 'en_IN'for Indian Names
@@ -47,7 +48,7 @@ def validate_account_holder_name(case, length, gap, dot, title):
     return name
 
 # Function to validate address field
-def validate_address(address_line='single', wrong_state=False, pincode_length=5):
+def validate_address(address_line='single', wrong_state=False, pincode_length=5, has_pincode=True, no_gap_address=False):
      # Generate the address line based on the input parameter
      # This Logic is Only valid for default Locale
     if address_line == 'single':
@@ -71,8 +72,14 @@ def validate_address(address_line='single', wrong_state=False, pincode_length=5)
     pincode = fake.postcode()[:pincode_length]
 
     # Format the address data as a string and return it
-    address_data = f"{address}\n{state}, {pincode}"
-    return address_data
+    # Adjust for Pincode True or False
+    if has_pincode:
+        address_data = f"{address}\n{state}, {pincode}"
+    else:
+        address_data = f"{address}\n{state}"
+    print(re.sub(r"[\n\t\s]*", "", address_data))
+    return re.sub(r"[\n\t\s]*", "", address_data) if not no_gap_address else address_data
+
 
 # Function to validate IFSC code field
 def validate_ifsc_code():
@@ -92,7 +99,7 @@ def validate_branch_name():
 # Function to validate branch name field
 def validate_account_number():
     # Validation rules go here
-    account_number = fake.swift()
+    account_number = fake.swift(length=8)
     return account_number
 
 # Function to validate account type field
@@ -179,7 +186,7 @@ with open(f"excel_sheets/{input_data['file_name']}_accounts.csv", mode='w', newl
             account_holder_name = input_data['default']['account_holder_name']
 
         if 'address' in input_data['target_field']:
-            address = validate_address(address_line=input_data['address']['address_line'], wrong_state=input_data['address']['wrong_state'])
+            address = validate_address(address_line=input_data['address']['address_line'], wrong_state=input_data['address']['wrong_state'],pincode_length=input_data['address']['pincode_length'],has_pincode=input_data['address']['has_pincode'])
         else:
             address = input_data['default']['address']
 

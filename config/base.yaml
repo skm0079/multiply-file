@@ -40,4 +40,8 @@ address:
       # True or False
     wrong_state: False 
       # Length of the Pin Code , default: , else use other lengths 3 upto 5
-    pincode_length: 5
+    pincode_length: 10
+      # Should have Pincode? True / False
+    has_pincode: False
+      # Gap between address True / False
+    no_gap_address: True

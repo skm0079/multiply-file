@@ -1,28 +1,4 @@
-account_holder_name,address,ifsc_code,micr_code,branch_name,account_type,opening_balance,closing_balance,debit,credit,date,total_balance
-rhea sachar,"64/98
-Thakur
-Odisha, 46383",,,,Company,"10,895.92","32,978.69","1,779.95","23,862.72",,"32,978.69"
-ARHAAN JANI,"H.No. 25
-Kadakia Path
-Meghalaya, 93729",,,,RD,"10,895.92","32,978.69","1,779.95","23,862.72",,"32,978.69"
-Mis,"669, Korpal Marg
-Chhattisgarh, 93090",,,,Savings,"10,895.92","32,978.69","1,779.95","23,862.72",,"32,978.69"
-Rania malhotra,"H.No. 051
-Lala Street
-Uttarakhand, 58111",,,,Company,"10,895.92","32,978.69","1,779.95","23,862.72",,"32,978.69"
-Iravasa,"H.No. 683
-Iyer Zila
-Sikkim, 76057",,,,Salary,"10,895.92","32,978.69","1,779.95","23,862.72",,"32,978.69"
-Riaan.thaker,"H.No. 263
-Dutt Street
-Manipur, 99291",,,,Current,"10,895.92","32,978.69","1,779.95","23,862.72",,"32,978.69"
-madan,"61
-Mani Nagar
-West Bengal, 27224",,,,Company,"10,895.92","32,978.69","1,779.95","23,862.72",,"32,978.69"
-Vedika Wadhwa,"H.No. 667
-Roy Street
-Maharashtra, 77522",,,,Current,"10,895.92","32,978.69","1,779.95","23,862.72",,"32,978.69"
-Divyansh Dubey,"26, Malhotra Ganj
-Bihar, 79310",,,,Current,"10,895.92","32,978.69","1,779.95","23,862.72",,"32,978.69"
-Hunar Cheema,"H.No. 64, Ravel Zila
-Assam, 49620",,,,Joint,"10,895.92","32,978.69","1,779.95","23,862.72",,"32,978.69"
+account_holder_name,address,ifsc_code,micr_code,branch_name,account_type,account_number,opening_balance,closing_balance,debit,credit,date,total_balance
+ehsaan sunder,70/723BhattacharyyaGanjOdisha,,,,Savings,,"10,895.92","32,978.69","1,779.95","23,862.72",,"32,978.69"
+TANYA GARDE,04/60TailorCircleMeghalaya,,,,Regular,,"10,895.92","32,978.69","1,779.95","23,862.72",,"32,978.69"
+Mir,"H.No.972,DasguptaGanjTripura",,,,Joint,,"10,895.92","32,978.69","1,779.95","23,862.72",,"32,978.69"

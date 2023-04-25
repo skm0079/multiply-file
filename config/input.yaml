@@ -1,26 +1,24 @@
 # Default Values
 # Defines number of rows to be generated in the CSV File
 number_of_rows: 3
-file_name: axis-bank
+file_name: askari-bank
 available_field: [account_holder_name, address, ifsc_code, micr_code, branch_name,
-  account_type, account_number, opening_balance, closing_balance, debit, credit, date,
-  total_balance]
-target_field: [account_holder_name, address, account_type, account_number]
+  account_type, opening_balance, closing_balance, debit, credit, date, total_balance]
+target_field: [account_holder_name, address, account_type]
 default:
-  account_holder_name: THANIGAIVEL BHEEMARAJ S
-  address: "NO 11 NEELAMEGAM STREET KAMARAJ NAGAR AVADI\nCHENNAI\nTAMIL NADU-INDIA\
-    \ 600071\n"
+  account_holder_name: MUKHTAR AHMAD BASHIR AHMAD
+  address: "Chak No.55/DB Yazman\nDistrict Bahawalpur\nPakistan\n"
   ifsc_code: ''
   micr_code: ''
   branch_name: ''
-  account_type: SALARY
-  opening_balance: '345.08'
-  closing_balance: '200.00'
-  debit: '420366.35'
-  credit: '420221.27'
-  date: ''
-  total_balance: ''
+  account_type: Current
   account_number: ''
+  opening_balance: 10,895.92
+  closing_balance: 32,978.69
+  debit: 1,779.95
+  credit: 23,862.72
+  date: ''
+  total_balance: 32,978.69
 account_holder_name:
       # Account holder names in small letters
   small_names: 1
@@ -31,6 +29,10 @@ account_holder_name:
   dot_names: 1
   no_title_names: 1
 address:
-      # Can Contain "single" or "double" or "three" or "four"
+      # Can Contain "single" or "double" or "three" or "four", Only valid on Default Locale
+      # Default and only value for India is "single"
   address_line: single
   wrong_state: false
+  pincode_length: 10
+  has_pincode: false
+  no_gap_address: true

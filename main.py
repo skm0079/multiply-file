@@ -65,6 +65,7 @@ def generate_document_and_pdf(template_path, data, output_dir):
             'micr_code': row['micr_code'],
             'branch_name': row['branch_name'],
             'account_type': row['account_type'],
+            'account_number': row['account_number'],
             'opening_balance': row['opening_balance'],
             'closing_balance': row['closing_balance'],
             'debit': row['debit'],
@@ -78,8 +79,8 @@ def generate_document_and_pdf(template_path, data, output_dir):
         doc.render(context)
 
         # Define output file paths
-        docx_output_path = os.path.join(output_dir, f"generated_doc_{index}.docx")
-        pdf_output_path = os.path.join(output_dir, f"generated_doc_{index}.pdf")
+        docx_output_path = os.path.join(output_dir, f"generated_doc_{input_yaml_data['file_name']}_{index}.docx")
+        pdf_output_path = os.path.join(output_dir, f"generated_doc_{input_yaml_data['file_name']}_{index}.pdf")
 
         try:
             # Save the document as a docx file
