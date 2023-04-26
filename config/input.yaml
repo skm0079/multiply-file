@@ -1,39 +1,39 @@
 # Default Values
 # Defines number of rows to be generated in the CSV File
-number_of_rows: 1
-file_name: askari-bank
+number_of_rows: 3
+file_name: MRMC
 available_field: [account_holder_name, address, ifsc_code, micr_code, branch_name,
   account_type, account_number, opening_balance, closing_balance, debit, credit, date,
   total_balance]
 target_field: [account_holder_name, address, account_type, account_number]
 default:
-  account_holder_name: MUKHTAR AHMAD BASHIR AHMAD
-  address: "Chak No.55/DB Yazman\nDistrict Bahawalpur\nPakistan\n"
+  account_holder_name: Orlando Taylor
+  address: "587 Welsh Road\nCanberra, ACT 2600\n"
   ifsc_code: ''
   micr_code: ''
-  branch_name: ''
-  account_type: Current
-  account_number: ''
-  opening_balance: 10,895.92
-  closing_balance: 32,978.69
-  debit: 1,779.95
-  credit: 23,862.72
+  branch_name: Canberra
+  account_type: ''
+  account_number: '95715155'
+  opening_balance: ''
+  closing_balance: ''
+  debit: $40,899
+  credit: $45,244
   date: ''
-  total_balance: 32,978.69
+  total_balance: $53,775 CR
 account_holder_name:
       # Account holder names in small letters
   small_names: 1
-  capital_names: 1
+  capital_names: 3
   short_names: 1
   long_names: 1
   no_gap_names: 1
   dot_names: 1
-  no_title_names: 1
+  no_title_names: 2
 address:
       # Can Contain "single" or "double" or "three" or "four", Only valid on Default Locale
       # Default and only value for India is "single"
   address_line: single
   wrong_state: false
   pincode_length: 5
-  has_pincode: false
+  has_pincode: true
   no_gap_address: false

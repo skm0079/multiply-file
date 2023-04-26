@@ -141,8 +141,7 @@ def calculate_total_balance(opening_balance, closing_balance, debit, credit):
 # Ask user for number of rows to generate
 num_rows = input_data['number_of_rows']
 
-# Get user modifications to account holder name
-
+# ACCOUNT HOLDER NAME MODIFICATION SETTINGS
 # How many account holder names should be in small letters?
 num_small_names = input_data['account_holder_name']['small_names']
 # How many account holder names should be in capital letters?

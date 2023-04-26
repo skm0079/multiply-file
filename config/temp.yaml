@@ -1,0 +1,47 @@
+# Default Values
+# Defines number of rows to be generated in the CSV File
+number_of_rows: 3
+file_name: "askari-bank"
+available_field: [account_holder_name,address,ifsc_code,micr_code,branch_name,account_type,account_number,opening_balance,closing_balance,debit,credit,date,total_balance]
+target_field: [account_holder_name,address,account_type,account_number]
+default: 
+    account_holder_name: ""
+    address: ""
+    ifsc_code: ""
+    micr_code: ""
+    branch_name: ""
+    account_type: ""
+    account_number: ""
+    opening_balance: ""
+    closing_balance: ""
+    debit: ""
+    credit: ""
+    date: ""
+    total_balance: ""
+account_holder_name:
+      # Account holder names in small letters
+    small_names: 1  
+      # Account holder names in capital letters
+    capital_names: 1 
+      # Account holder names in only 3 letters
+    short_names: 1 
+      # Account holder names have 25 letters?
+    long_names: 1 
+      # Account holder names not have gaps
+    no_gap_names: 1 
+      # Account holder names have dots between the names
+    dot_names: 1  
+      # Account holder names not have a title
+    no_title_names: 1 
+address:
+      # Can Contain "single" or "double" or "three" or "four", Only valid on Default Locale
+      # Default and only value for India is "single"
+    address_line: "single" 
+      # True or False
+    wrong_state: False 
+      # Length of the Pin Code , default: , else use other lengths 3 upto 5
+    pincode_length: 5
+      # Should have Pincode? True / False
+    has_pincode: False
+      # Gap between address True / False
+    no_gap_address: True
