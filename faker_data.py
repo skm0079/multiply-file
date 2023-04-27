@@ -126,8 +126,6 @@ def validate_account_number(target_value, case="default"):
         validated_account_number = generate_random_string(target_item=target_value,custom_length=account_number_length,has_alphabet=False,has_special_characters=True,blank=False)
     elif case == 'blank':
         validated_account_number = generate_random_string(target_item=target_value,custom_length=account_number_length,has_alphabet=False,has_special_characters=False,blank=True)
-    else:
-        validated_account_number = generate_random_string(target_item=target_value,custom_length=account_number_length,has_alphabet=has_alphabet,has_special_characters=has_special_characters,blank=blank)
     return validated_account_number
 
 # Function to validate account type field
