@@ -1,25 +1,25 @@
 # Default Values
 # Defines number of rows to be generated in the CSV File
 number_of_rows: 1
-file_name: MRMC
+file_name: sbh-bank
 available_field: [account_holder_name, address, ifsc_code, micr_code, branch_name,
   account_type, account_number, opening_balance, closing_balance, debit, credit, date,
   total_balance]
 target_field: [account_holder_name, address, account_type, account_number]
 default:
-  account_holder_name: Orlando Taylor
-  address: "587 Welsh Road\nCanberra, ACT 2600\n"
-  ifsc_code: ''
-  micr_code: ''
-  branch_name: Canberra
+  account_holder_name: Mr. DUDIGAM ANJANAILU
+  address: ''
+  ifsc_code: SBHY0020076
+  micr_code: '500004054'
+  branch_name: SANATHNAGAR HYDERABAD
   account_type: ''
-  account_number: '95715155'
-  opening_balance: ''
-  closing_balance: ''
-  debit: $40,899
-  credit: $45,244
+  account_number: '00000052208489170'
+  opening_balance: 12,599.85
+  closing_balance: 4,751.85
+  debit: ''
+  credit: ''
   date: ''
-  total_balance: $53,775 CR
+  total_balance: ''
 account_holder_name:
       # Account holder names in small letters
   small_names: 1
