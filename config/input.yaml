@@ -1,11 +1,11 @@
 # Default Values
 # Defines number of rows to be generated in the CSV File
-number_of_rows: 5
+number_of_rows: 2
 file_name: MRMC
 available_field: [account_holder_name, address, ifsc_code, micr_code, branch_name,
   account_type, account_number, opening_balance, closing_balance, debit, credit, date,
   total_balance]
-target_field: [account_holder_name, address, account_type, account_number]
+target_field: [account_number]
 default:
   account_holder_name: Orlando Taylor
   address: "587 Welsh Road\nCanberra, ACT 2600\n"
@@ -39,8 +39,8 @@ address:
   no_gap_address: true
 account_number:
       # Use Default Normal Faker Generation , if False other settings combination will be used
-  normal: [false, 1]
-  account_number_length: [7, 1]
-  has_alphabet: [false, 1]
-  has_special_characters: [false, 1]
-  blank: [false, 1]
+  normal: [false, 0]
+  account_number_length: [7, 0]
+  has_alphabet: [true, 2]
+  has_special_characters: [false, 0]
+  blank: [false, 0]

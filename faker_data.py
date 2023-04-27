@@ -4,7 +4,7 @@ import ruamel.yaml
 import csv
 import re
 from faker import Faker
-from custom_utils import generate_random_string
+from custom_utils import generate_account_number, generate_random_string
 
 # 'en_IN'for Indian Names
 fake = Faker('en_IN')
@@ -105,7 +105,7 @@ def validate_branch_name():
     return fake.company()
 
 # Function to validate branch name field
-def validate_account_number(target_value=fake.swift(length=8), case="default"):
+def validate_account_number(target_value, case="default"):
     # Default input values in yaml
     account_number_length = input_data['account_number']['account_number_length'][0]
     has_alphabet = input_data['account_number']['has_alphabet'][0]
@@ -113,11 +113,11 @@ def validate_account_number(target_value=fake.swift(length=8), case="default"):
     blank = input_data['account_number']['blank'][0]
 
     # Validated Return Value
-    validated_account_number = target_value
-
+    validated_account_number = generate_account_number()
+    # print(f"validated_account_number: {validated_account_number}")
     # Validation rules go here
     if case == 'default':
-        return account_number
+        return validated_account_number
     elif case == 'account_number_length':
         validated_account_number = generate_random_string(target_item=target_value,custom_length=account_number_length,has_alphabet=False,has_special_characters=False,blank=False)
     elif case == 'has_alphabet':
@@ -242,7 +242,8 @@ with open(f"excel_sheets/{input_data['file_name']}_accounts.csv", mode='w', newl
             # print(input_data['account_number']['account_number_length'][0])
             # print(input_data['account_number']['account_number_length'][1])
             # Generate base account number
-            base_account_number = fake.swift(length=8)
+            base_account_number = generate_account_number(input_data['account_number']['account_number_length'][0])
+            # print(f"base_account_number {base_account_number}")
             if input_data['account_number']['account_number_length'][1] > 0:
                 account_number = validate_account_number(base_account_number, 'account_number_length')
                 input_data['account_number']['account_number_length'][1] -= 1

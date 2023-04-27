@@ -112,9 +112,4 @@ if __name__ == '__main__':
     # Generate documents and pdfs
     generate_document_and_pdf(template_path, data, output_doc_dir)
 
-    # Convert all generated docx files to pdf
-    for file_name in os.listdir(output_doc_dir):
-        if file_name.endswith('.docx'):
-            file_path = os.path.join(output_doc_dir, file_name)
-            convert_docx_to_pdf(file_path, os.path.join(output_pdf_dir, file_name.replace('.docx', '.pdf')))
 

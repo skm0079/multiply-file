@@ -1,6 +1,10 @@
 import random
 import string
 
+from faker import Faker
+
+faker = Faker('en_IN')  # Set the Faker instance to generate data for India
+
 def generate_random_string(target_item, custom_length=7, has_alphabet=False, has_special_characters=False, blank=False):
     """
     Generate a random string based on the given criteria.
@@ -16,6 +20,7 @@ def generate_random_string(target_item, custom_length=7, has_alphabet=False, has
         str: The generated random string based on the given criteria.
     """
     try:
+        # print(f"target_item: {target_item}")
         # Convert target_item to string if it's not already
         target_item = str(target_item)
         
@@ -31,6 +36,13 @@ def generate_random_string(target_item, custom_length=7, has_alphabet=False, has
                 target_item += random.choice(alphabet)
             else:
                 target_item = target_item.zfill(custom_length)
+        # elif target_item.isnumeric() and len(target_item) >= custom_length:
+        #         if has_alphabet:
+        #             alphabet = string.ascii_letters
+        #             target_item = target_item.zfill(custom_length - 1)
+        #             target_item += random.choice(alphabet)
+        #         else:
+        #             target_item = target_item.zfill(custom_length)
         else:
             # If the target_item is a string, append or prepend both number or string
             characters = string.digits
@@ -44,10 +56,19 @@ def generate_random_string(target_item, custom_length=7, has_alphabet=False, has
                 target_item += ''.join(random.choices(characters, k=target_length))
             elif target_length < 0:
                 target_item = target_item[:custom_length]
-        
+        print(f"Return from Randomizer: {target_item}")
         return target_item
     
     except Exception as e:
         # Handle any exceptions and return None
         print(f"Error generating random string: {str(e)}")
         return None
+
+# Generate a random Indian bank account number of a given length
+def generate_account_number(length=12):
+    account_number = ''
+    while len(account_number) < length:
+        account_number += str(faker.random_digit())
+    return account_number[:length]
+
+
