@@ -38,10 +38,21 @@ address:
       # Default and only value for India is "single"
     address_line: "single" 
       # True or False
-    wrong_state: False 
+    wrong_state: false 
       # Length of the Pin Code , default: , else use other lengths 3 upto 5
     pincode_length: 5
       # Should have Pincode? True / False
-    has_pincode: False
+    has_pincode: false
       # Gap between address True / False
-    no_gap_address: True
+    no_gap_address: true
+account_number:
+      # Use Default Normal Faker Generation , if False other settings combination will be used
+    normal: [false,1]
+      # Size of the Account Number , can be less than 7 or more than 20
+    account_number_length: [7,1]
+      # Should it have alphabets? true / false, besides number it can also have alphabets if true , default value false
+    has_alphabet: [false,1]
+      # Should it have special character ? true / false , default value false
+    has_special_characters: [false,1]
+     # Account Number is a Blank field , if true makes the output blank or emppty string, default false
+    blank: [false, 1]

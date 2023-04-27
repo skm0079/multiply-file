@@ -4,6 +4,7 @@ import ruamel.yaml
 import csv
 import re
 from faker import Faker
+from custom_utils import generate_random_string
 
 # 'en_IN'for Indian Names
 fake = Faker('en_IN')
@@ -104,10 +105,30 @@ def validate_branch_name():
     return fake.company()
 
 # Function to validate branch name field
-def validate_account_number():
+def validate_account_number(target_value=fake.swift(length=8), case="default"):
+    # Default input values in yaml
+    account_number_length = input_data['account_number']['account_number_length'][0]
+    has_alphabet = input_data['account_number']['has_alphabet'][0]
+    has_special_characters = input_data['account_number']['has_special_characters'][0]
+    blank = input_data['account_number']['blank'][0]
+
+    # Validated Return Value
+    validated_account_number = target_value
+
     # Validation rules go here
-    account_number = fake.swift(length=8)
-    return account_number
+    if case == 'default':
+        return account_number
+    elif case == 'account_number_length':
+        validated_account_number = generate_random_string(target_item=target_value,custom_length=account_number_length,has_alphabet=False,has_special_characters=False,blank=False)
+    elif case == 'has_alphabet':
+        validated_account_number = generate_random_string(target_item=target_value,custom_length=account_number_length,has_alphabet=True,has_special_characters=False,blank=False)
+    elif case == 'has_special_characters':
+        validated_account_number = generate_random_string(target_item=target_value,custom_length=account_number_length,has_alphabet=False,has_special_characters=True,blank=False)
+    elif case == 'blank':
+        validated_account_number = generate_random_string(target_item=target_value,custom_length=account_number_length,has_alphabet=False,has_special_characters=False,blank=True)
+    else:
+        validated_account_number = generate_random_string(target_item=target_value,custom_length=account_number_length,has_alphabet=has_alphabet,has_special_characters=has_special_characters,blank=blank)
+    return validated_account_number
 
 # Function to validate account type field
 def validate_account_type():
@@ -216,8 +237,29 @@ with open(f"excel_sheets/{input_data['file_name']}_accounts.csv", mode='w', newl
         else:
             account_type = input_data['default']['account_type']
 
+        # Logic for Account Number
         if 'account_number' in input_data['target_field']:
-            account_number = validate_account_number()
+            # print(input_data['account_number']['account_number_length'][0])
+            # print(input_data['account_number']['account_number_length'][1])
+            # Generate base account number
+            base_account_number = fake.swift(length=8)
+            if input_data['account_number']['account_number_length'][1] > 0:
+                account_number = validate_account_number(base_account_number, 'account_number_length')
+                input_data['account_number']['account_number_length'][1] -= 1
+            elif input_data['account_number']['has_alphabet'][1] > 0:
+                account_number = validate_account_number(base_account_number, 'has_alphabet')
+                input_data['account_number']['has_alphabet'][1] -= 1
+            elif input_data['account_number']['has_special_characters'][1] > 0:
+                account_number = validate_account_number(base_account_number, 'has_special_characters')
+                input_data['account_number']['has_special_characters'][1] -= 1
+            elif input_data['account_number']['blank'][1] > 0:
+                account_number = validate_account_number(base_account_number, 'blank')
+                input_data['account_number']['blank'][1] -= 1
+            elif input_data['account_number']['normal'][1] > 0:
+                account_number = validate_account_number(base_account_number, 'default')
+                input_data['account_number']['normal'][1] -= 1
+            else:
+                account_number = validate_account_number(base_account_number, 'other')
         else:
             account_number = input_data['default']['account_number']
         
