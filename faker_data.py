@@ -244,19 +244,19 @@ with open(f"excel_sheets/{input_data['file_name']}_accounts.csv", mode='w', newl
             # Generate base account number
             base_account_number = generate_account_number(input_data['account_number']['account_number_length'][0])
             # print(f"base_account_number {base_account_number}")
-            if input_data['account_number']['account_number_length'][1] > 0:
+            if input_data['account_number']['account_number_length'][1] > 0 and input_data['account_number']['account_number_length'][1]:
                 account_number = validate_account_number(base_account_number, 'account_number_length')
                 input_data['account_number']['account_number_length'][1] -= 1
-            elif input_data['account_number']['has_alphabet'][1] > 0:
+            elif input_data['account_number']['has_alphabet'][1] > 0 and input_data['account_number']['has_alphabet'][1]:
                 account_number = validate_account_number(base_account_number, 'has_alphabet')
                 input_data['account_number']['has_alphabet'][1] -= 1
-            elif input_data['account_number']['has_special_characters'][1] > 0:
+            elif input_data['account_number']['has_special_characters'][1] > 0 and input_data['account_number']['has_special_characters'][1]:
                 account_number = validate_account_number(base_account_number, 'has_special_characters')
                 input_data['account_number']['has_special_characters'][1] -= 1
-            elif input_data['account_number']['blank'][1] > 0:
+            elif input_data['account_number']['blank'][1] > 0 and input_data['account_number']['blank'][1]:
                 account_number = validate_account_number(base_account_number, 'blank')
                 input_data['account_number']['blank'][1] -= 1
-            elif input_data['account_number']['normal'][1] > 0:
+            elif input_data['account_number']['normal'][1] > 0 and input_data['account_number']['normal'][1]:
                 account_number = validate_account_number(base_account_number, 'default')
                 input_data['account_number']['normal'][1] -= 1
             else:

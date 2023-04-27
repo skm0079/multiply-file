@@ -25,7 +25,7 @@ def generate_random_string(target_item, custom_length=7, has_alphabet=False, has
         target_item = str(target_item)
         
         if blank:
-            return ""
+            return "       "
         
         # Check if the target_item is a number and less than the custom_length
         if target_item.isnumeric() and len(target_item) < custom_length:
@@ -36,13 +36,13 @@ def generate_random_string(target_item, custom_length=7, has_alphabet=False, has
                 target_item += random.choice(alphabet)
             else:
                 target_item = target_item.zfill(custom_length)
-        # elif target_item.isnumeric() and len(target_item) >= custom_length:
-        #         if has_alphabet:
-        #             alphabet = string.ascii_letters
-        #             target_item = target_item.zfill(custom_length - 1)
-        #             target_item += random.choice(alphabet)
-        #         else:
-        #             target_item = target_item.zfill(custom_length)
+        elif target_item.isnumeric() and len(target_item) >= custom_length:
+                if has_alphabet:
+                    target_item = replace_random_chars_with_letters(target_item)
+                if has_special_characters:
+                    target_item = replace_random_chars_with_punctuations(target_item)
+                else:
+                    target_item = target_item.zfill(custom_length)
         else:
             # If the target_item is a string, append or prepend both number or string
             characters = string.digits
@@ -72,3 +72,30 @@ def generate_account_number(length=12):
     return account_number[:length]
 
 
+def replace_random_chars_with_letters(input_string):
+    # Convert input string to list for in-place modification
+    output_list = list(input_string)
+    
+    # Get indices of characters to replace
+    indices = random.sample(range(len(output_list)), random.randint(1, len(output_list)))
+    
+    # Replace characters at the chosen indices with random letters
+    for index in indices:
+        output_list[index] = random.choice(string.ascii_uppercase)
+    
+    # Convert list back to string and return
+    return ''.join(output_list)
+
+def replace_random_chars_with_punctuations(input_string):
+    # Convert input string to list for in-place modification
+    output_list = list(input_string)
+    
+    # Get indices of characters to replace
+    indices = random.sample(range(len(output_list)), random.randint(1, len(output_list)))
+    
+    # Replace characters at the chosen indices with random punctuation characters
+    for index in indices:
+        output_list[index] = random.choice(string.punctuation)
+    
+    # Convert list back to string and return
+    return ''.join(output_list)
