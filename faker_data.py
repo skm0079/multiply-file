@@ -4,7 +4,7 @@ import ruamel.yaml
 import csv
 import re
 from faker import Faker
-from custom_utils import generate_account_number, generate_random_string
+from custom_utils import generate_account_number, generate_ifsc, generate_random_string
 
 # 'en_IN'for Indian Names
 fake = Faker('en_IN')
@@ -90,9 +90,30 @@ def validate_address(address_line='single', wrong_state=False, pincode_length=5,
 
 
 # Function to validate IFSC code field
-def validate_ifsc_code():
+def validate_ifsc_code(target_value, case="default"):
+    # input_data['ifsc_code']['ifsc_code_length'][0]
     # Validation rules go here
-    return fake.swift()
+
+    ifsc_code_length = input_data['ifsc_code']['ifsc_code_length'][0]
+    has_alphabet = input_data['ifsc_code']['has_alphabet'][0]
+    has_special_characters = input_data['ifsc_code']['has_special_characters'][0]
+    blank = input_data['ifsc_code']['blank'][0]
+
+    validated_ifsc_code = generate_ifsc(ifsc_code_length)
+
+    if case == 'default':
+        return validated_ifsc_code
+    elif case == 'ifsc_code_length':
+        validated_ifsc_code = generate_random_string(target_item=target_value,custom_length=ifsc_code_length,has_alphabet=False,has_special_characters=False,blank=False)
+    elif case == 'has_alphabet':
+        validated_ifsc_code = generate_random_string(target_item=target_value,custom_length=ifsc_code_length,has_alphabet=True,has_special_characters=False,blank=False)
+    elif case == 'has_special_characters':
+        validated_ifsc_code = generate_random_string(target_item=target_value,custom_length=ifsc_code_length,has_alphabet=False,has_special_characters=True,blank=False)
+    elif case == 'blank':
+        validated_ifsc_code = generate_random_string(target_item=target_value,custom_length=ifsc_code_length,has_alphabet=False,has_special_characters=False,blank=True)
+    elif case == 'faulty':
+        validated_ifsc_code = fake.swift(length=ifsc_code_length)
+    return validated_ifsc_code
 
 # Function to validate MICR code field
 def validate_micr_code():
@@ -134,20 +155,97 @@ def validate_account_type():
     return fake.word(ext_word_list=['Savings', 'Regular', 'Current','Joint','Salary','RD','Company'])
 
 # Function to generate random opening balance
-def generate_opening_balance():
-    return random.randint(1000, 10000)
+def generate_opening_balance(target_value, case="default",start=1000, end=10000):
+
+    vaidated_opening_balance = random.randint(start, end)
+
+    start_range = input_data['opening_balance']['start_range']
+    end_range = input_data['opening_balance']['end_range']
+    has_alphabet = input_data['opening_balance']['has_alphabet'][0]
+    has_special_characters = input_data['opening_balance']['has_special_characters'][0]
+    blank = input_data['opening_balance']['blank'][0]
+
+    if case == 'default':
+        return vaidated_opening_balance
+    elif case == 'account_number_length':
+        vaidated_opening_balance = generate_random_string(target_item=target_value,has_alphabet=False,has_special_characters=False,blank=False)
+    elif case == 'has_alphabet':
+        vaidated_opening_balance = generate_random_string(target_item=target_value,has_alphabet=True,has_special_characters=False,blank=False)
+    elif case == 'has_special_characters':
+        vaidated_opening_balance = generate_random_string(target_item=target_value,has_alphabet=False,has_special_characters=True,blank=False)
+    elif case == 'blank':
+        vaidated_opening_balance = generate_random_string(target_item=target_value,has_alphabet=False,has_special_characters=False,blank=True)
+    return random.randint(start_range, end_range)
 
 # Function to generate random closing balance
-def generate_closing_balance():
-    return random.randint(1000, 10000)
+def generate_closing_balance(target_value, case="default",start=1000, end=10000):
+
+    vaidated_closing_balance = random.randint(start, end)
+
+    start_range = input_data['closing_balance']['start_range']
+    end_range = input_data['closing_balance']['end_range']
+    has_alphabet = input_data['closing_balance']['has_alphabet'][0]
+    has_special_characters = input_data['closing_balance']['has_special_characters'][0]
+    blank = input_data['closing_balance']['blank'][0]
+
+    if case == 'default':
+        return vaidated_closing_balance
+    elif case == 'account_number_length':
+        vaidated_closing_balance = generate_random_string(target_item=target_value,has_alphabet=False,has_special_characters=False,blank=False)
+    elif case == 'has_alphabet':
+        vaidated_closing_balance = generate_random_string(target_item=target_value,has_alphabet=True,has_special_characters=False,blank=False)
+    elif case == 'has_special_characters':
+        vaidated_closing_balance = generate_random_string(target_item=target_value,has_alphabet=False,has_special_characters=True,blank=False)
+    elif case == 'blank':
+        vaidated_closing_balance = generate_random_string(target_item=target_value,has_alphabet=False,has_special_characters=False,blank=True)
+    return random.randint(start_range, end_range)
+
 
 # Function to generate random debit amount
-def generate_debit():
-    return random.randint(100, 1000)
+def generate_debit(target_value, case="default",start=1000, end=10000):
+
+    vaidated_debit = random.randint(start, end)
+
+    start_range = input_data['debit']['start_range']
+    end_range = input_data['debit']['end_range']
+    has_alphabet = input_data['debit']['has_alphabet'][0]
+    has_special_characters = input_data['debit']['has_special_characters'][0]
+    blank = input_data['debit']['blank'][0]
+    if case == 'default':
+        return vaidated_debit
+    elif case == 'account_number_length':
+        vaidated_debit = generate_random_string(target_item=target_value,has_alphabet=False,has_special_characters=False,blank=False)
+    elif case == 'has_alphabet':
+        vaidated_debit = generate_random_string(target_item=target_value,has_alphabet=True,has_special_characters=False,blank=False)
+    elif case == 'has_special_characters':
+        vaidated_debit = generate_random_string(target_item=target_value,has_alphabet=False,has_special_characters=True,blank=False)
+    elif case == 'blank':
+        vaidated_debit = generate_random_string(target_item=target_value,has_alphabet=False,has_special_characters=False,blank=True)
+
+    return vaidated_debit
 
 # Function to generate random credit amount
-def generate_credit():
-    return random.randint(100, 1000)
+def generate_credit(target_value, case="default",start=1000, end=10000):
+
+    vaidated_credit = random.randint(start, end)   
+
+    start_range = input_data['credit']['start_range']
+    end_range = input_data['credit']['end_range']
+    has_alphabet = input_data['credit']['has_alphabet'][0]
+    has_special_characters = input_data['credit']['has_special_characters'][0]
+    blank = input_data['credit']['blank'][0]
+    if case == 'default':
+        return vaidated_credit
+    elif case == 'account_number_length':
+        vaidated_credit = generate_random_string(target_item=target_value,has_alphabet=False,has_special_characters=False,blank=False)
+    elif case == 'has_alphabet':
+        vaidated_credit = generate_random_string(target_item=target_value,has_alphabet=True,has_special_characters=False,blank=False)
+    elif case == 'has_special_characters':
+        vaidated_credit = generate_random_string(target_item=target_value,has_alphabet=False,has_special_characters=True,blank=False)
+    elif case == 'blank':
+        vaidated_credit = generate_random_string(target_item=target_value,has_alphabet=False,has_special_characters=False,blank=True)
+
+    return vaidated_credit
 
 # Function to generate random date
 def generate_date():
@@ -155,7 +253,10 @@ def generate_date():
 
 # Function to generate total balance
 def calculate_total_balance(opening_balance, closing_balance, debit, credit):
-    return opening_balance + credit - debit + closing_balance
+    if all(isinstance(n, (int, float)) for n in [opening_balance, closing_balance, debit, credit]):
+        return opening_balance + credit - debit + closing_balance
+    else:
+        return random.uniform(0, 100)
 
 # Ask user for number of rows to generate
 num_rows = input_data['number_of_rows']
@@ -216,7 +317,28 @@ with open(f"excel_sheets/{input_data['file_name']}_accounts.csv", mode='w', newl
             address = input_data['default']['address']
 
         if 'ifsc_code' in input_data['target_field']:
-            ifsc_code = validate_ifsc_code()
+            # ifsc_code = validate_ifsc_code()
+            base_ifsc_code= generate_ifsc()
+            if input_data['ifsc_code']['ifsc_code_length'][1] > 0 and input_data['ifsc_code']['ifsc_code_length'][0]:
+                ifsc_code= validate_ifsc_code(base_ifsc_code, 'ifsc_code_length')
+                input_data['ifsc_code']['ifsc_code_length'][1] -= 1
+            elif input_data['ifsc_code']['has_alphabet'][1] > 0 and input_data['ifsc_code']['has_alphabet'][0]:
+                ifsc_code= validate_ifsc_code(base_ifsc_code, 'has_alphabet')
+                input_data['ifsc_code']['has_alphabet'][1] -= 1
+            elif input_data['ifsc_code']['has_special_characters'][1] > 0 and input_data['ifsc_code']['has_special_characters'][0]:
+                ifsc_code= validate_ifsc_code(base_ifsc_code, 'has_special_characters')
+                input_data['ifsc_code']['has_special_characters'][1] -= 1
+            elif input_data['ifsc_code']['blank'][1] > 0 and input_data['ifsc_code']['blank'][0]:
+                ifsc_code= validate_ifsc_code(base_ifsc_code, 'blank')
+                input_data['ifsc_code']['blank'][1] -= 1
+            elif input_data['ifsc_code']['normal'][1] > 0 and input_data['ifsc_code']['normal'][0]:
+                ifsc_code= validate_ifsc_code(base_ifsc_code, 'default')
+                input_data['ifsc_code']['normal'][1] -= 1
+            elif input_data['ifsc_code']['faulty'][1] > 0 and input_data['ifsc_code']['faulty'][0]:
+                ifsc_code= validate_ifsc_code(base_ifsc_code, 'faulty')
+                input_data['ifsc_code']['faulty'][1] -= 1
+            else:
+                ifsc_code= validate_ifsc_code(base_ifsc_code, 'other')
         else:
             ifsc_code = input_data['default']['ifsc_code']
         
@@ -237,8 +359,6 @@ with open(f"excel_sheets/{input_data['file_name']}_accounts.csv", mode='w', newl
 
         # Logic for Account Number
         if 'account_number' in input_data['target_field']:
-            # print(input_data['account_number']['account_number_length'][0])
-            # print(input_data['account_number']['account_number_length'][1])
             # Generate base account number
             base_account_number = generate_account_number(input_data['account_number']['account_number_length'][0])
             # print(f"base_account_number {base_account_number}")
@@ -263,22 +383,69 @@ with open(f"excel_sheets/{input_data['file_name']}_accounts.csv", mode='w', newl
             account_number = input_data['default']['account_number']
         
         if 'opening_balance' in input_data['target_field']:
-            opening_balance = generate_opening_balance()
+            start_range = input_data['opening_balance']['start_range']
+            end_range = input_data['opening_balance']['end_range']
+            base_opening_balance = random.randint(start_range,end_range)
+            if input_data['opening_balance']['has_alphabet'][1] > 0 and input_data['opening_balance']['has_alphabet'][1]:
+                opening_balance = generate_opening_balance(base_opening_balance, 'has_alphabet',start_range,end_range)
+                input_data['opening_balance']['has_alphabet'][1] -= 1
+            elif input_data['opening_balance']['has_special_characters'][1] > 0 and input_data['opening_balance']['has_special_characters'][1]:
+                opening_balance = generate_opening_balance(base_opening_balance, 'has_special_characters',start_range,end_range)
+                input_data['opening_balance']['has_special_characters'][1] -= 1
+            elif input_data['opening_balance']['blank'][1] > 0 and input_data['opening_balance']['blank'][1]:
+                opening_balance = generate_opening_balance(base_opening_balance, 'blank',start_range,end_range)
+                input_data['opening_balance']['blank'][1] -= 1
         else:
             opening_balance = input_data['default']['opening_balance']
         
         if 'closing_balance' in input_data['target_field']:
-            closing_balance = generate_closing_balance()
+            start_range = input_data['closing_balance']['start_range']
+            end_range = input_data['closing_balance']['end_range']
+            base_closing_balance = random.randint(start_range,end_range)
+
+            if input_data['closing_balance']['has_alphabet'][1] > 0 and input_data['closing_balance']['has_alphabet'][1]:
+                closing_balance = generate_closing_balance(base_closing_balance, 'has_alphabet',start_range,end_range)
+                input_data['closing_balance']['has_alphabet'][1] -= 1
+            elif input_data['closing_balance']['has_special_characters'][1] > 0 and input_data['closing_balance']['has_special_characters'][1]:
+                closing_balance = generate_closing_balance(base_closing_balance, 'has_special_characters',start_range,end_range)
+                input_data['closing_balance']['has_special_characters'][1] -= 1
+            elif input_data['closing_balance']['blank'][1] > 0 and input_data['closing_balance']['blank'][1]:
+                closing_balance = generate_closing_balance(base_closing_balance, 'blank',start_range,end_range)
+                input_data['closing_balance']['blank'][1] -= 1
         else:
             closing_balance = input_data['default']['closing_balance']
         
         if 'debit' in input_data['target_field']:
-            debit = generate_debit()
+            start_range = input_data['debit']['start_range']
+            end_range = input_data['debit']['end_range']
+            base_debit = random.randint(start_range,end_range)
+
+            if input_data['debit']['has_alphabet'][1] > 0 and input_data['debit']['has_alphabet'][1]:
+                debit = generate_debit(base_debit, 'has_alphabet',start_range,end_range)
+                input_data['debit']['has_alphabet'][1] -= 1
+            elif input_data['debit']['has_special_characters'][1] > 0 and input_data['debit']['has_special_characters'][1]:
+                debit = generate_debit(base_debit, 'has_special_characters',start_range,end_range)
+                input_data['debit']['has_special_characters'][1] -= 1
+            elif input_data['debit']['blank'][1] > 0 and input_data['debit']['blank'][1]:
+                debit = generate_debit(base_debit, 'blank',start_range,end_range)
+                input_data['debit']['blank'][1] -= 1
         else:
             debit = input_data['default']['debit']
         
         if 'credit' in input_data['target_field']:
-            credit = generate_credit()
+            start_range = input_data['credit']['start_range']
+            end_range = input_data['credit']['end_range']
+            base_credit = random.randint(start_range,end_range)
+
+            if input_data['credit']['has_alphabet'][1] > 0 and input_data['credit']['has_alphabet'][1]:
+                credit = generate_credit(base_credit, 'has_alphabet',start_range,end_range)
+                input_data['credit']['has_alphabet'][1] -= 1
+            elif input_data['credit']['has_special_characters'][1] > 0 and input_data['credit']['has_special_characters'][1]:
+                credit = generate_credit(base_credit, 'has_special_characters',start_range,end_range)
+                input_data['credit']['has_special_characters'][1] -= 1
+            elif input_data['credit']['blank'][1] > 0 and input_data['credit']['blank'][1]:
+                credit = generate_credit(base_credit, 'blank',start_range,end_range)
+                input_data['credit']['blank'][1] -= 1
         else:
             credit = input_data['default']['credit']
         

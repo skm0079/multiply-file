@@ -64,6 +64,21 @@ def generate_random_string(target_item, custom_length=7, has_alphabet=False, has
         print(f"Error generating random string: {str(e)}")
         return None
 
+# Generate a random Indian bank IFSC Code with general standard
+def generate_ifsc(length=11):
+    # The first four characters of an Indian bank IFSC code are alphabets
+    alphabets = string.ascii_uppercase
+    prefix = ''.join(random.choices(alphabets, k=4))
+
+    # The fifth character is always a zero
+    prefix += '0'
+
+    # The last six characters can be alphanumeric
+    suffix = ''.join(random.choices(string.ascii_uppercase + string.digits, k=length-5))
+
+    return prefix + suffix
+
+
 # Generate a random Indian bank account number of a given length
 def generate_account_number(length=12):
     account_number = ''

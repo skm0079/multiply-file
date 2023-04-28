@@ -1,21 +1,22 @@
 # Default Values
 # Defines number of rows to be generated in the CSV File
-number_of_rows: 5
+number_of_rows: 3
 file_name: MRMC
 available_field: [account_holder_name, address, ifsc_code, micr_code, branch_name,
   account_type, account_number, opening_balance, closing_balance, debit, credit, date,
   total_balance]
-target_field: [account_number]
+target_field: [account_holder_name, address, ifsc_code, micr_code, branch_name, account_type,
+  account_number, opening_balance, closing_balance, debit, credit, date, total_balance]
 default:
   account_holder_name: Orlando Taylor
   address: "587 Welsh Road\nCanberra, ACT 2600\n"
-  ifsc_code: ''
-  micr_code: ''
+  ifsc_code: test ifsc_code
+  micr_code: test micr_code
   branch_name: Canberra
-  account_type: ''
+  account_type: test account_type
   account_number: '95715155'
-  opening_balance: ''
-  closing_balance: ''
+  opening_balance: test opening_balance
+  closing_balance: test closing_balance
   debit: $40,899
   credit: $45,244
   date: ''
@@ -39,8 +40,44 @@ address:
   no_gap_address: true
 account_number:
       # Use Default Normal Faker Generation , if False other settings combination will be used
-  normal: [false, 0]
-  account_number_length: [10, 0]
+  normal: [false, 1]
+  account_number_length: [7, 1]
+  has_alphabet: [false, 1]
+  has_special_characters: [false, 1]
+  blank: [false, 1]
+ifsc_code:
+    # Use Default Normal Indian Bank Scheme Based Generation , if False other settings combination will be used
+  normal: [false, 1]
+  ifsc_code_length: [11, 1]
   has_alphabet: [true, 1]
   has_special_characters: [false, 1]
-  blank: [true, 1]
+  blank: [false, 1]
+  faulty: [true, 1]
+opening_balance:
+      # The range between which the number would lie
+  start_range: 1000
+  end_range: 2000
+  has_alphabet: [true, 1]
+  has_special_characters: [false, 1]
+  blank: [false, 1]
+closing_balance:
+      # The range between which the number would lie
+  start_range: 1000
+  end_range: 2000
+  has_alphabet: [true, 1]
+  has_special_characters: [false, 1]
+  blank: [false, 1]
+debit:
+      # The range between which the number would lie
+  start_range: 1000
+  end_range: 2000
+  has_alphabet: [true, 1]
+  has_special_characters: [false, 1]
+  blank: [false, 1]
+credit:
+      # The range between which the number would lie
+  start_range: 1000
+  end_range: 2000
+  has_alphabet: [true, 1]
+  has_special_characters: [false, 1]
+  blank: [false, 1]

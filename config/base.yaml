@@ -1,9 +1,9 @@
 # Default Values
 # Defines number of rows to be generated in the CSV File
 number_of_rows: 3
-file_name: "askari-bank"
+file_name: "MRMC"
 available_field: [account_holder_name,address,ifsc_code,micr_code,branch_name,account_type,account_number,opening_balance,closing_balance,debit,credit,date,total_balance]
-target_field: [account_holder_name,address,account_type,account_number]
+target_field: [ifsc_code]
 default: 
     account_holder_name: ""
     address: ""
@@ -56,3 +56,56 @@ account_number:
     has_special_characters: [false,1]
      # Account Number is a Blank field , if true makes the output blank or emppty string, default false
     blank: [false, 1]
+ifsc_code:
+    # Use Default Normal Indian Bank Scheme Based Generation , if False other settings combination will be used
+    normal: [false,1]
+    # Ifsc code is less than 11 characters 
+    ifsc_code_length: [11,1]
+    # number other than 0 in the fifth field.
+    has_alphabet: [true,1]
+    # Should it have special character ? true / false , default value false
+    has_special_characters: [false,1]
+    # ifsc_code is a Blank field , if true makes the output blank or empty string, default false
+    blank: [false, 1]
+    # Wrong Format
+    faulty: [true,1]
+opening_balance:
+      # The range between which the number would lie
+    start_range: 1000
+    end_range: 2000
+    has_alphabet: [true,1]
+    # Should it have special character ? true / false , default value false
+    has_special_characters: [false,1]
+    # Blank field , if true makes the output blank or empty string, default false
+    blank: [false, 1]
+
+closing_balance:
+      # The range between which the number would lie
+    start_range: 1000
+    end_range: 2000
+    has_alphabet: [true,1]
+    # Should it have special character ? true / false , default value false
+    has_special_characters: [false,1]
+    # Blank field , if true makes the output blank or empty string, default false
+    blank: [false, 1]
+
+debit:
+      # The range between which the number would lie
+    start_range: 1000
+    end_range: 2000
+    has_alphabet: [true,1]
+    # Should it have special character ? true / false , default value false
+    has_special_characters: [false,1]
+    # Blank field , if true makes the output blank or empty string, default false
+    blank: [false, 1]
+
+credit:
+      # The range between which the number would lie
+    start_range: 1000
+    end_range: 2000
+    has_alphabet: [true,1]
+    # Should it have special character ? true / false , default value false
+    has_special_characters: [false,1]
+    # Blank field , if true makes the output blank or empty string, default false
+    blank: [false, 1]
+
