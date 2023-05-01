@@ -1,83 +1,85 @@
 # Default Values
 # Defines number of rows to be generated in the CSV File
-number_of_rows: 3
-file_name: MRMC
+number_of_rows: 2
+file_name: axis-bank
+action: random
 available_field: [account_holder_name, address, ifsc_code, micr_code, branch_name,
   account_type, account_number, opening_balance, closing_balance, debit, credit, date,
   total_balance]
 target_field: [account_holder_name, address, ifsc_code, micr_code, branch_name, account_type,
   account_number, opening_balance, closing_balance, debit, credit, date, total_balance]
 default:
-  account_holder_name: Orlando Taylor
-  address: "587 Welsh Road\nCanberra, ACT 2600\n"
-  ifsc_code: test ifsc_code
-  micr_code: test micr_code
-  branch_name: Canberra
-  account_type: test account_type
-  account_number: '95715155'
-  opening_balance: test opening_balance
-  closing_balance: test closing_balance
-  debit: $40,899
-  credit: $45,244
+  account_holder_name: THANIGAIVEL BHEEMARAJ S
+  address: "NO 11 NEELAMEGAM STREET KAMARAJ NAGAR AVADI\nCHENNAI\nTAMIL NADU-INDIA\
+    \ 600071\n"
+  ifsc_code: ''
+  micr_code: ''
+  branch_name: ''
+  account_type: SALARY
+  account_number: '912010052152945'
+  opening_balance: '345.08'
+  closing_balance: '200.00'
+  debit: '420366.35'
+  credit: '420221.27'
   date: ''
-  total_balance: $53,775 CR
+  total_balance: ''
 account_holder_name:
       # Account holder names in small letters
-  small_names: 1
-  capital_names: 1
-  short_names: 1
-  long_names: 1
-  no_gap_names: 1
-  dot_names: 1
-  no_title_names: 1
+  small_names: 5
+  capital_names: 5
+  short_names: 5
+  long_names: 5
+  no_gap_names: 5
+  dot_names: 5
+  no_title_names: 5
 address:
       # Can Contain "single" or "double" or "three" or "four", Only valid on Default Locale
       # Default and only value for India is "single"
   address_line: single
   wrong_state: false
   pincode_length: 5
-  has_pincode: false
-  no_gap_address: true
+  has_pincode: true
+  no_gap_address: false
 account_number:
       # Use Default Normal Faker Generation , if False other settings combination will be used
-  normal: [false, 1]
-  account_number_length: [7, 1]
-  has_alphabet: [false, 1]
-  has_special_characters: [false, 1]
-  blank: [false, 1]
+  normal: [false, 5]
+  account_number_length: [7, 5]
+  has_alphabet: [true, 1]
+  has_special_characters: [true, 5]
+  blank: [false, 5]
 ifsc_code:
     # Use Default Normal Indian Bank Scheme Based Generation , if False other settings combination will be used
   normal: [false, 1]
   ifsc_code_length: [11, 1]
-  has_alphabet: [true, 1]
-  has_special_characters: [false, 1]
-  blank: [false, 1]
-  faulty: [true, 1]
+  has_alphabet: [true, 5]
+  has_special_characters: [true, 5]
+  blank: [true, 5]
+  faulty: [true, 5]
 opening_balance:
       # The range between which the number would lie
-  start_range: 1000
-  end_range: 2000
-  has_alphabet: [true, 1]
-  has_special_characters: [false, 1]
-  blank: [false, 1]
+  start_range: 5000
+  end_range: 20000
+  has_alphabet: [true, 5]
+  has_special_characters: [false, 5]
+  blank: [false, 5]
 closing_balance:
       # The range between which the number would lie
-  start_range: 1000
-  end_range: 2000
-  has_alphabet: [true, 1]
-  has_special_characters: [false, 1]
-  blank: [false, 1]
+  start_range: 5000
+  end_range: 20000
+  has_alphabet: [true, 5]
+  has_special_characters: [true, 5]
+  blank: [true, 5]
 debit:
       # The range between which the number would lie
-  start_range: 1000
-  end_range: 2000
+  start_range: 5000
+  end_range: 20000
   has_alphabet: [true, 1]
-  has_special_characters: [false, 1]
-  blank: [false, 1]
+  has_special_characters: [true, 1]
+  blank: [true, 1]
 credit:
       # The range between which the number would lie
-  start_range: 1000
-  end_range: 2000
+  start_range: 5000
+  end_range: 20000
   has_alphabet: [true, 1]
-  has_special_characters: [false, 1]
-  blank: [false, 1]
+  has_special_characters: [true, 1]
+  blank: [true, 1]
