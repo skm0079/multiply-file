@@ -22,14 +22,13 @@ from docx2pdf import convert
 from PIL import Image, ImageDraw, ImageFont
 import xml.etree.ElementTree as ET
 
-def annotate_text(doc_file_path, target_text, annotation_text, output_png_path, output_xml_path):
+def annotate_text(doc_file_path, target_annotation_pairs, output_png_path, output_xml_path):
     """
     Annotate target text with annotation text in bounding boxes and convert to PNG image.
 
     Args:
         doc_file_path (str): Path to the input Docx file.
-        target_text (str): The target text to annotate.
-        annotation_text (str): The annotation text to use.
+        target_annotation_pairs (list): A list of tuples, where each tuple contains a target text and its corresponding annotation text.
         output_png_path (str): Path to the output PNG file.
         output_xml_path (str): Path to the output XML file.
 
@@ -46,15 +45,21 @@ def annotate_text(doc_file_path, target_text, annotation_text, output_png_path, 
     except Exception as e:
         raise RuntimeError("Failed to convert Docx to PNG.") from e
 
-    # Get bounding boxes for target text
-    bbox = get_bounding_box_multi_page(target_text, image)
+    # Initialize list of bounding boxes for all target text
+    all_bbox = []
 
     # Annotate image with bounding boxes
     draw = ImageDraw.Draw(image)
     font = ImageFont.truetype("arial.ttf", 20)
-    for box in bbox:
-        draw.rectangle(box, outline="red", width=2)
-        draw.text((box[0], box[1] - 20), annotation_text, font=font, fill="red")
+    for target_text, annotation_text in target_annotation_pairs:
+        # Get bounding boxes for current target text
+        bbox = get_bounding_box_multi_page(target_text, image)
+        all_bbox.extend(bbox)
+
+        # Draw bounding boxes and annotation text for current target text
+        for box in bbox:
+            draw.rectangle(box, outline="red", width=2)
+            draw.text((box[0], box[1] - 20), annotation_text, font=font, fill="red")
 
     # Save annotated image to PNG file
     try:
@@ -64,15 +69,17 @@ def annotate_text(doc_file_path, target_text, annotation_text, output_png_path, 
 
     # Generate XML file with annotation information
     xml_root = ET.Element("annotations")
-    xml_object = ET.SubElement(xml_root, "object")
-    xml_object.set("name", annotation_text)
-    xml_bndbox = ET.SubElement(xml_object, "bndbox")
-    for box in bbox:
-        xml_box = ET.SubElement(xml_bndbox, "box")
-        xml_box.set("xmin", str(box[0]))
-        xml_box.set("ymin", str(box[1]))
-        xml_box.set("xmax", str(box[2]))
-        xml_box.set("ymax", str(box[3]))
+    for i, (target_text, annotation_text) in enumerate(target_annotation_pairs):
+        xml_object = ET.SubElement(xml_root, "object")
+        xml_object.set("name", annotation_text)
+        bbox_start = i * len(all_bbox) // len(target_annotation_pairs)
+        bbox_end = (i+1) * len(all_bbox) // len(target_annotation_pairs)
+        for box in all_bbox[bbox_start:bbox_end]:
+            xml_box = ET.SubElement(xml_object, "bndbox")
+            xml_box.set("xmin", str(box[0]))
+            xml_box.set("ymin", str(box[1]))
+            xml_box.set("xmax", str(box[2]))
+            xml_box.set("ymax", str(box[3]))
     xml_tree = ET.ElementTree(xml_root)
     try:
         xml_tree.write(output_xml_path)
@@ -361,10 +368,10 @@ def generate_document_and_pdf(template_path, data, output_dir):
             add_table_to_doc(docx_output_path,'Transaction Table', 10, 6) # Example values for 10 rows and 6 columns
 
             # Annotate and convert to PNG
-            annotate_text(docx_output_path,"Currency","Currency",png_output_path,xml_output_path)
+            annotate_text(docx_output_path,[("Currency","Currency"),("INR","INR")],png_output_path,xml_output_path)
 
             # Convert the docx file to pdf
-            convert_docx_to_pdf(docx_output_path, pdf_output_path)
+            # convert_docx_to_pdf(docx_output_path, pdf_output_path)
         except Exception as e:
             raise RuntimeError("Failed to generate document and pdf.") from e
 
