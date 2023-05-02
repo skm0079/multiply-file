@@ -413,18 +413,11 @@ def generate_document_and_pdf(template_path, data, output_dir):
 # Function to create The tuple for Annotation Label Mapping
 def create_target_annotation_tuple(context_dict, label_list, target_label):
     label_map = [(x[0], x[1]) for x in label_list]
-    print("context_dict")
-    pprint.pprint(context_dict) 
-    print("label_map")
-    pprint.pprint(label_map) 
-    print("target_label")
-    pprint.pprint(target_label) 
     filtered_dict = {k: v for k, v in context_dict.items() if k in target_label}
     result = []
     for key, value in label_map:
         if key in filtered_dict:
             result.append((str(filtered_dict[key]), value))
-    pprint.pprint(result)
     return result
 
 
