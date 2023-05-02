@@ -68,23 +68,55 @@ def annotate_text(doc_file_path, target_annotation_pairs, output_png_path, outpu
         raise RuntimeError("Failed to save PNG file.") from e
 
     # Generate XML file with annotation information
-    xml_root = ET.Element("annotations")
+    xml_root = ET.Element("annotation")
+    xml_folder = ET.SubElement(xml_root, "folder")
+    xml_folder.text = os.path.dirname(os.path.abspath(output_png_path))
+    xml_filename = ET.SubElement(xml_root, "filename")
+    xml_filename.text = os.path.basename(output_png_path)
+    xml_path = ET.SubElement(xml_root, "path")
+    xml_path.text = os.path.abspath(output_png_path)
+    xml_source = ET.SubElement(xml_root, "source")
+    xml_database = ET.SubElement(xml_source, "database")
+    xml_database.text = "Unknown"
+    xml_size = ET.SubElement(xml_root, "size")
+    xml_width = ET.SubElement(xml_size, "width")
+    xml_width.text = str(image.size[0])
+    xml_height = ET.SubElement(xml_size, "height")
+    xml_height.text = str(image.size[1])
+    xml_depth = ET.SubElement(xml_size, "depth")
+    xml_depth.text = "3"
+    xml_segmented = ET.SubElement(xml_root, "segmented")
+    xml_segmented.text = "0"
     for i, (target_text, annotation_text) in enumerate(target_annotation_pairs):
         xml_object = ET.SubElement(xml_root, "object")
-        xml_object.set("name", annotation_text)
+        xml_name = ET.SubElement(xml_object, "name")
+        xml_name.text = annotation_text
+        xml_pose = ET.SubElement(xml_object, "pose")
+        xml_pose.text = "Unspecified"
+        xml_truncated = ET.SubElement(xml_object, "truncated")
+        xml_truncated.text = "0"
+        xml_difficult = ET.SubElement(xml_object, "difficult")
+        xml_difficult.text = "0"
         bbox_start = i * len(all_bbox) // len(target_annotation_pairs)
         bbox_end = (i+1) * len(all_bbox) // len(target_annotation_pairs)
         for box in all_bbox[bbox_start:bbox_end]:
-            xml_box = ET.SubElement(xml_object, "bndbox")
-            xml_box.set("xmin", str(box[0]))
-            xml_box.set("ymin", str(box[1]))
-            xml_box.set("xmax", str(box[2]))
-            xml_box.set("ymax", str(box[3]))
+            xml_bndbox = ET.SubElement(xml_object, "bndbox")
+            xml_xmin = ET.SubElement(xml_bndbox, "xmin")
+            xml_xmin.text = str(box[0])
+            xml_ymin = ET.SubElement(xml_bndbox, "ymin")
+            xml_ymin.text = str(box[1])
+            xml_xmax = ET.SubElement(xml_bndbox, "xmax")
+            xml_xmax.text = str(box[2])
+            xml_ymax = ET.SubElement(xml_bndbox, "ymax")
+            xml_ymax.text = str(box[3])
+
     xml_tree = ET.ElementTree(xml_root)
     try:
         xml_tree.write(output_xml_path)
     except Exception as e:
         raise RuntimeError("Failed to save XML file.") from e
+
+
 
 def convert_to_image(doc_file_path):
     """
