@@ -56,7 +56,7 @@ def generate_random_string(target_item, custom_length=7, has_alphabet=False, has
                 target_item += ''.join(random.choices(characters, k=target_length))
             elif target_length < 0:
                 target_item = target_item[:custom_length]
-        print(f"Return from Randomizer: {target_item}")
+        # print(f"Return from Randomizer: {target_item}")
         return target_item
     
     except Exception as e:

@@ -1,0 +1,26 @@
+- - account_holder_name
+  - Account Name
+- - account_number
+  - Account Number
+- - account_type
+  - Account Type
+- - address
+  - Address
+- - branch_name
+  - Branch Name
+- - closing_balance
+  - Closing Balance
+- - credit
+  - Credit
+- - debit
+  - Debit
+- - ifsc_code
+  - IFSC Code
+- - micr_code
+  - MICR Code
+- - opening_balance
+  - Opening Balance
+- - date
+  - Date
+- - total_balance
+  - Total Balance

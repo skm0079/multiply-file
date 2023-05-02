@@ -1,7 +1,6 @@
 import uuid
 from faker import Faker
 import random
-import docx
 from typing import List
 from PIL import Image
 import pytesseract
@@ -387,6 +386,8 @@ def generate_document_and_pdf(template_path, data, output_dir):
         doc = DocxTemplate(template_path)
         doc.render(context)
 
+        # Pretty Print the current Context
+        # pprint.pprint(context)
         # Define output file paths
         docx_output_path = os.path.join(output_dir, f"generated_doc_{input_yaml_data['file_name']}_{input_yaml_data['action']}_{index+1}.docx")
         pdf_output_path = os.path.join(output_dir, f"generated_doc_{input_yaml_data['file_name']}_{input_yaml_data['action']}_{index+1}.pdf")
@@ -399,13 +400,32 @@ def generate_document_and_pdf(template_path, data, output_dir):
             # Add table to the document
             add_table_to_doc(docx_output_path,'Transaction Table', 10, 6) # Example values for 10 rows and 6 columns
 
+            annotation_tuple = create_target_annotation_tuple(context_dict=context,label_list=mapping_yaml_data,target_label=input_yaml_data['target_label'])
+            
             # Annotate and convert to PNG
-            annotate_text(docx_output_path,[("Currency","Currency"),("INR","INR")],png_output_path,xml_output_path)
+            annotate_text(docx_output_path,annotation_tuple,png_output_path,xml_output_path)
 
             # Convert the docx file to pdf
             # convert_docx_to_pdf(docx_output_path, pdf_output_path)
         except Exception as e:
             raise RuntimeError("Failed to generate document and pdf.") from e
+
+# Function to create The tuple for Annotation Label Mapping
+def create_target_annotation_tuple(context_dict, label_list, target_label):
+    label_map = [(x[0], x[1]) for x in label_list]
+    print("context_dict")
+    pprint.pprint(context_dict) 
+    print("label_map")
+    pprint.pprint(label_map) 
+    print("target_label")
+    pprint.pprint(target_label) 
+    filtered_dict = {k: v for k, v in context_dict.items() if k in target_label}
+    result = []
+    for key, value in label_map:
+        if key in filtered_dict:
+            result.append((str(filtered_dict[key]), value))
+    pprint.pprint(result)
+    return result
 
 
 if __name__ == '__main__':
@@ -417,6 +437,10 @@ if __name__ == '__main__':
     # Load the config input
     with open('config/input.yaml', 'r') as file:
         input_yaml_data = yaml.safe_load(file)
+
+    # Load the config Label Mappings
+    with open('config/label_mapping.yaml', 'r') as file:
+        mapping_yaml_data = yaml.safe_load(file)
     
     # Define input file paths
     template_path = os.path.join(input_dir, 'docx_templates', f"{input_yaml_data['file_name']}.docx")
