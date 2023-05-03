@@ -180,12 +180,14 @@ def get_bounding_box_multi_page(target_text: str, image: Image) -> List[List[int
             pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
             ocr_text = pytesseract.image_to_data(page_image, output_type=pytesseract.Output.DICT)
             boxes = []
-            for i in range(len(ocr_text['text'])):
-                if ocr_text['text'][i].strip() == search_text:
+            words = [w.lower() for w in search_text.split()]
+            for i in range(len(ocr_text['text']) - len(words) + 1):
+                text = ' '.join([w.lower() for w in ocr_text['text'][i:i+len(words)]])
+                if text == search_text.lower():
                     x = ocr_text['left'][i]
                     y = ocr_text['top'][i]
-                    w = ocr_text['width'][i]
-                    h = ocr_text['height'][i]
+                    w = sum(ocr_text['width'][i:i+len(words)])
+                    h = max(ocr_text['height'][i:i+len(words)])
                     boxes.append([x + left, y + top, x + w + left, y + h + top])
 
             if not boxes:

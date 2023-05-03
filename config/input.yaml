@@ -11,8 +11,7 @@ target_field: [account_holder_name, address, ifsc_code, micr_code, branch_name, 
 available_label: [Account Name, Account Number, Account Type, Address, Branch Name,
   Closing Balance, Credit, Debit, IFSC Code, MICR Code, Opening Balance, Date, Total
     Balance]
-target_label: [account_holder_name, address, ifsc_code, micr_code, branch_name, account_type,
-  account_number, opening_balance, closing_balance, debit, credit, date, total_balance]
+target_label: [account_holder_name, address, account_number]
 default:
   account_holder_name: THANIGAIVEL BHEEMARAJ S
   address: "NO 11 NEELAMEGAM STREET KAMARAJ NAGAR AVADI\nCHENNAI\nTAMIL NADU-INDIA\
