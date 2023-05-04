@@ -1,6 +1,6 @@
 import random
 import string
-
+import mysql.connector
 from faker import Faker
 
 faker = Faker('en_IN')  # Set the Faker instance to generate data for India
@@ -80,11 +80,29 @@ def generate_ifsc(length=11):
 
 
 # Generate a random Indian bank account number of a given length
-def generate_account_number(length=12):
-    account_number = ''
-    while len(account_number) < length:
-        account_number += str(faker.random_digit())
-    return account_number[:length]
+
+def generate_account_number(ifsc_code: str, micr_code: str, bank_name: str, branch_name: str, length=12):
+    if ifsc_code and micr_code and bank_name and branch_name:
+        # Extract the bank and branch codes from the IFSC code
+        bank_code = ifsc_code[:4]
+        branch_code = ifsc_code[4:]
+
+        # Convert the MICR code to an integer
+        micr_int = int(micr_code)
+
+        # Generate a random number of length (length - 10) digits
+        rand_num = random.randint(10**(length - 10), 10**(length - 10 + 1) - 1)
+
+        # Combine the bank code, branch code, MICR code, and random number to form the synthetic account number
+        acct_num = f"{bank_code}{branch_code}{micr_int:09d}{rand_num:0{length - 10}d}"
+    else:
+        # Generate a random account number if any of the required input fields are missing
+        account_number = ''
+        while len(account_number) < length:
+            account_number += str(random.randint(0, 9))
+        acct_num = account_number[:length]
+
+    return acct_num
 
 
 def replace_random_chars_with_letters(input_string):
@@ -114,3 +132,38 @@ def replace_random_chars_with_punctuations(input_string):
     
     # Convert list back to string and return
     return ''.join(output_list)
+
+
+# Query MYSQL for Data on Banks
+
+def execute_query(query):
+    # define database connection parameters
+    config = {
+        'user': 'tomcat',
+        'password': 'toor',
+        'host': 'localhost',
+        'database': 'banks'
+    }
+
+    try:
+        # try to connect to the database
+        conn = mysql.connector.connect(**config)
+
+        # create a cursor object
+        cursor = conn.cursor()
+
+        # execute the SQL query
+        cursor.execute(query)
+
+        # fetch the results
+        results = cursor.fetchall()
+
+        # close the database connection
+        conn.close()
+
+        # return the results as a list of tuples
+        return results
+
+    except mysql.connector.Error as e:
+        print("Error connecting to database:", e)
+        exit()

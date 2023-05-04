@@ -63,7 +63,7 @@ ifsc_code:
     # Use Default Normal Indian Bank Scheme Based Generation , if False other settings combination will be used
     normal: [false,1]
     # Ifsc code is less than 11 characters 
-    ifsc_code_length: [11,1]
+    ifsc_code_length: [false,11,1]
     # number other than 0 in the fifth field.
     has_alphabet: [true,1]
     # Should it have special character ? true / false , default value false

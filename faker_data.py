@@ -4,7 +4,7 @@ import ruamel.yaml
 import csv
 import re
 from faker import Faker
-from custom_utils import generate_account_number, generate_ifsc, generate_random_string
+from custom_utils import execute_query, generate_account_number, generate_ifsc, generate_random_string
 
 # 'en_IN'for Indian Names
 fake = Faker('en_IN')
@@ -16,6 +16,24 @@ with open('config/default.yaml', 'r') as file:
 # Open and read the YAML file
 with open('config/input.yaml') as yaml_file:
     input_data = yaml.safe_load(yaml_file)
+
+
+
+
+# Function to generate random bank detail and set the Values
+
+def get_random_bank():
+    response = execute_query('SELECT ID, BANK, IFSC, MICR, BRANCH, CITY FROM banks ORDER BY RAND() LIMIT 1;')
+    # Working Bank Values
+    query_data = {
+        "BANK_ID" : response[0][0],
+        "BANK_NAME" :response[0][1],
+        "BANK_IFSC" :response[0][2],
+        "BANK_MICR" :response[0][3],
+        "BANK_BRANCH" :response[0][4],
+        "BANK_CITY" :response[0][5]
+    }
+    return query_data
 
 # Function to validate account holder name field
 def validate_account_holder_name(case, length, gap, dot, title):
@@ -48,7 +66,7 @@ def validate_account_holder_name(case, length, gap, dot, title):
 
     return name
 
-# Function to validate address field
+# TODO: Function to validate address field
 def validate_address(address_line='single', wrong_state=False, pincode_length=5, has_pincode=True, no_gap_address=False):
      # Generate the address line based on the input parameter
      # This Logic is Only valid for default Locale
@@ -134,7 +152,7 @@ def validate_account_number(target_value, case="default"):
     blank = input_data['account_number']['blank'][0]
 
     # Validated Return Value
-    validated_account_number = generate_account_number()
+    validated_account_number = target_value
     # print(f"validated_account_number: {validated_account_number}")
     # Validation rules go here
     if case == 'default':
@@ -277,6 +295,7 @@ num_dot_names = input_data['account_holder_name']['dot_names']
 # How many account holder names should not have a title?
 num_no_title_names = input_data['account_holder_name']['no_title_names']
 
+BANK_DETAILS = get_random_bank()
 
 # Generate CSV file with random data
 with open(f"excel_sheets/{input_data['file_name']}_accounts.csv", mode='w', newline='') as file:
@@ -318,8 +337,8 @@ with open(f"excel_sheets/{input_data['file_name']}_accounts.csv", mode='w', newl
 
         if 'ifsc_code' in input_data['target_field']:
             # ifsc_code = validate_ifsc_code()
-            base_ifsc_code= generate_ifsc()
-            if input_data['ifsc_code']['ifsc_code_length'][1] > 0 and input_data['ifsc_code']['ifsc_code_length'][0]:
+            base_ifsc_code= BANK_DETAILS['BANK_IFSC']
+            if input_data['ifsc_code']['ifsc_code_length'][2] > 0 and input_data['ifsc_code']['ifsc_code_length'][0]:
                 ifsc_code= validate_ifsc_code(base_ifsc_code, 'ifsc_code_length')
                 input_data['ifsc_code']['ifsc_code_length'][1] -= 1
             elif input_data['ifsc_code']['has_alphabet'][1] > 0 and input_data['ifsc_code']['has_alphabet'][0]:
@@ -343,12 +362,12 @@ with open(f"excel_sheets/{input_data['file_name']}_accounts.csv", mode='w', newl
             ifsc_code = input_data['default']['ifsc_code']
         
         if 'micr_code' in input_data['target_field']:
-            micr_code = validate_micr_code()
+            micr_code = BANK_DETAILS['BANK_MICR']
         else:
             micr_code = input_data['default']['micr_code']
         
         if 'branch_name' in input_data['target_field']:
-            branch_name = validate_branch_name()
+            branch_name = BANK_DETAILS['BANK_BRANCH']
         else:
             branch_name = input_data['default']['branch_name']
         
@@ -360,7 +379,7 @@ with open(f"excel_sheets/{input_data['file_name']}_accounts.csv", mode='w', newl
         # Logic for Account Number
         if 'account_number' in input_data['target_field']:
             # Generate base account number
-            base_account_number = generate_account_number(input_data['account_number']['account_number_length'][0])
+            base_account_number = generate_account_number(BANK_DETAILS['BANK_IFSC'],BANK_DETAILS['BANK_MICR'],BANK_DETAILS['BANK_NAME'],BANK_DETAILS['BANK_BRANCH'],input_data['account_number']['account_number_length'][0])
             # print(f"base_account_number {base_account_number}")
             if input_data['account_number']['account_number_length'][1] > 0 and input_data['account_number']['account_number_length'][1]:
                 account_number = validate_account_number(base_account_number, 'account_number_length')

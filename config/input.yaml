@@ -1,6 +1,6 @@
 # Default Values
 # Defines number of rows to be generated in the CSV File
-number_of_rows: 1
+number_of_rows: 25
 file_name: axis-bank
 action: random
 available_field: [account_holder_name, address, ifsc_code, micr_code, branch_name,
@@ -11,7 +11,7 @@ target_field: [account_holder_name, address, ifsc_code, micr_code, branch_name, 
 available_label: [Account Name, Account Number, Account Type, Address, Branch Name,
   Closing Balance, Credit, Debit, IFSC Code, MICR Code, Opening Balance, Date, Total
     Balance]
-target_label: [account_holder_name, address, account_number]
+target_label: [account_holder_name, address, account_number, account_type]
 default:
   account_holder_name: THANIGAIVEL BHEEMARAJ S
   address: "NO 11 NEELAMEGAM STREET KAMARAJ NAGAR AVADI\nCHENNAI\nTAMIL NADU-INDIA\
@@ -46,44 +46,44 @@ address:
   no_gap_address: false
 account_number:
       # Use Default Normal Faker Generation , if False other settings combination will be used
-  normal: [false, 5]
-  account_number_length: [7, 5]
-  has_alphabet: [true, 1]
-  has_special_characters: [true, 5]
-  blank: [false, 5]
+  normal: [true, 5]
+  account_number_length: [12, 5]
+  has_alphabet: [false, 0]
+  has_special_characters: [false, 0]
+  blank: [false, 0]
 ifsc_code:
     # Use Default Normal Indian Bank Scheme Based Generation , if False other settings combination will be used
-  normal: [false, 1]
-  ifsc_code_length: [11, 1]
-  has_alphabet: [true, 5]
-  has_special_characters: [true, 5]
-  blank: [true, 5]
-  faulty: [true, 5]
+  normal: [true, 1]
+  ifsc_code_length: [false, 11, 1]
+  has_alphabet: [false, 0]
+  has_special_characters: [false, 0]
+  blank: [false, 0]
+  faulty: [false, 0]
 opening_balance:
       # The range between which the number would lie
   start_range: 5000
   end_range: 20000
-  has_alphabet: [true, 5]
+  has_alphabet: [false, 5]
   has_special_characters: [false, 5]
   blank: [false, 5]
 closing_balance:
       # The range between which the number would lie
   start_range: 5000
   end_range: 20000
-  has_alphabet: [true, 5]
-  has_special_characters: [true, 5]
-  blank: [true, 5]
+  has_alphabet: [false, 5]
+  has_special_characters: [false, 5]
+  blank: [false, 5]
 debit:
       # The range between which the number would lie
   start_range: 5000
   end_range: 20000
-  has_alphabet: [true, 1]
-  has_special_characters: [true, 1]
-  blank: [true, 1]
+  has_alphabet: [false, 1]
+  has_special_characters: [false, 1]
+  blank: [false, 1]
 credit:
       # The range between which the number would lie
   start_range: 5000
   end_range: 20000
-  has_alphabet: [true, 1]
-  has_special_characters: [true, 1]
-  blank: [true, 1]
+  has_alphabet: [false, 1]
+  has_special_characters: [false, 1]
+  blank: [false, 1]
