@@ -56,9 +56,10 @@ def annotate_text(doc_file_path, target_annotation_pairs, output_png_path, outpu
         all_bbox.extend(bbox)
 
         # Draw bounding boxes and annotation text for current target text
-        for box in bbox:
-            draw.rectangle(box, outline="red", width=2)
-            draw.text((box[0], box[1] - 20), annotation_text, font=font, fill="red")
+        if input_yaml_data['mark_annotations']:
+            for box in bbox:
+                draw.rectangle(box, outline="red", width=2)
+                draw.text((box[0], box[1] - 20), annotation_text, font=font, fill="red")
 
     # Save annotated image to PNG file
     try:
@@ -183,7 +184,7 @@ def get_bounding_box_multi_page(target_text: str, image: Image) -> List[List[int
             words = [w.lower() for w in search_text.split()]
             for i in range(len(ocr_text['text']) - len(words) + 1):
                 if search_text.__contains__('\n'):
-                    mod_text = ' '.join([w.lower() for w in ocr_text['text'][i:i+len(words)+4]]).lstrip()
+                    mod_text = ' '.join([w.lower() for w in ocr_text['text'][i:i+len(words)+1]]).lstrip()
                     mod_search_text = search_text.lower().replace('\n', '  ').strip()
                 else:
                     mod_text = ' '.join([w.lower() for w in ocr_text['text'][i:i+len(words)]])
@@ -404,8 +405,9 @@ def generate_document_and_pdf(template_path, data, output_dir):
         try:
             # Save the document as a docx file
             doc.save(docx_output_path)
-            # Add table to the document
-            add_table_to_doc(docx_output_path,'Transaction Table', 10, 6) # Example values for 10 rows and 6 columns
+            if input_yaml_data['automate_table']:
+                # Add table to the document
+                add_table_to_doc(docx_output_path,'Transaction Table', 10, 6) # Example values for 10 rows and 6 columns
 
             annotation_tuple = create_target_annotation_tuple(context_dict=context,label_list=mapping_yaml_data,target_label=input_yaml_data['target_label'])
             

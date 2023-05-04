@@ -5,6 +5,23 @@ from faker import Faker
 
 faker = Faker('en_IN')  # Set the Faker instance to generate data for India
 
+# Sentence Equality Check
+
+def is_sentence_contained(sentence1: str, sentence2: str) -> bool:
+    """
+    Returns True if sentence1 is fully contained in sentence2, ignoring spaces, and False otherwise.
+    """
+    # Remove all spaces from both sentences
+    sentence1_no_space = ''.join(sentence1.split())
+    sentence2_no_space = ''.join(sentence2.split())
+
+    # Check if sentence1 is fully contained in sentence2
+    if sentence1_no_space in sentence2_no_space:
+        return True
+    else:
+        return False
+
+
 def generate_random_string(target_item, custom_length=7, has_alphabet=False, has_special_characters=False, blank=False):
     """
     Generate a random string based on the given criteria.

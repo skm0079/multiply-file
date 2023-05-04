@@ -1,4 +1,41 @@
 # Default Values
+ubi:
+    account_holder_name: INDIRA SAPARE
+    address: | 
+        PLOT NO 23 RENUKA HOUSING SOCIETY
+        City - NAGPUR
+        State- MAHARASHTRA	Country- IN	
+    PinCode: "440036"
+    account_number: "49802030032344"
+    branch_code: "34980"
+    closing_balance: 40,632.87
+    date: 27/06/2017
+icici:
+    account_number: 628101563529
+    closing_balance: 47000.00
+    date: 24-09-2019
+sbi: 
+    account_holder_name: DWARIKADHEESH 
+    ifsc_code: SBIN0001393
+    account_type: salary
+    account_number: 37901545494
+    closing_balance: 98965.62
+pnb: 
+    account_number: 3953000400017453
+    ifsc_code: PUNB0395300
+    account_holder_name: PRITI GAUR D/O GIRRAJ SINGH GAUR
+    account_type: Joint Account 
+    address: | 
+        VILL BAMNI KHERA NEAR POST OFFICE
+        TEH & DISTT PALWAL City- PALWAL 
+    pincode: 121102
+    closing_balance: 33,631.66 Cr
+    closing_balance_date: 21/02/2020
+    last_debit_ammount: 3,200.00
+    last_debit_date: 21/02/2020
+    last_credit_ammount: 3,000.00
+    last_credit_date: 22/02/2020
+
 askari-bank: 
     account_holder_name: "MUKHTAR AHMAD BASHIR AHMAD"
     address: |

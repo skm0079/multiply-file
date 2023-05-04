@@ -1,8 +1,10 @@
 # Default Values
 # Defines number of rows to be generated in the CSV File
-number_of_rows: 25
-file_name: axis-bank
+number_of_rows: 10
+file_name: ubi
 action: random
+mark_annotations: true
+automate_table: false
 available_field: [account_holder_name, address, ifsc_code, micr_code, branch_name,
   account_type, account_number, opening_balance, closing_balance, debit, credit, date,
   total_balance]
@@ -11,22 +13,25 @@ target_field: [account_holder_name, address, ifsc_code, micr_code, branch_name, 
 available_label: [Account Name, Account Number, Account Type, Address, Branch Name,
   Closing Balance, Credit, Debit, IFSC Code, MICR Code, Opening Balance, Date, Total
     Balance]
-target_label: [account_holder_name, address, account_number, account_type]
+target_label: [account_holder_name, address, ifsc_code, micr_code, branch_name, account_type,
+  account_number, opening_balance, closing_balance, debit, credit, date, total_balance]
 default:
-  account_holder_name: THANIGAIVEL BHEEMARAJ S
-  address: "NO 11 NEELAMEGAM STREET KAMARAJ NAGAR AVADI\nCHENNAI\nTAMIL NADU-INDIA\
-    \ 600071\n"
+  account_holder_name: INDIRA SAPARE
+  address: "PLOT NO 23 RENUKA HOUSING SOCIETY\nCity - NAGPUR\nState- MAHARASHTRA\t\
+    Country- IN\t\n"
   ifsc_code: ''
   micr_code: ''
   branch_name: ''
   account_type: SALARY
-  account_number: '912010052152945'
+  account_number: '49802030032344'
   opening_balance: '345.08'
-  closing_balance: '200.00'
+  closing_balance: 40,632.87
   debit: '420366.35'
   credit: '420221.27'
-  date: ''
+  date: 27/06/2017
   total_balance: ''
+  PinCode: '440036'
+  branch_code: '34980'
 account_holder_name:
       # Account holder names in small letters
   small_names: 5
