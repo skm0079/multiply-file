@@ -184,7 +184,7 @@ def get_bounding_box_multi_page(target_text: str, image: Image) -> List[List[int
             words = [w.lower() for w in search_text.split()]
             for i in range(len(ocr_text['text']) - len(words) + 1):
                 if search_text.__contains__('\n'):
-                    mod_text = ' '.join([w.lower() for w in ocr_text['text'][i:i+len(words)+1]]).lstrip()
+                    mod_text = ' '.join([w.lower() for w in ocr_text['text'][i:i+len(words)+1]]).strip()
                     mod_search_text = search_text.lower().replace('\n', '  ').strip()
                 else:
                     mod_text = ' '.join([w.lower() for w in ocr_text['text'][i:i+len(words)]])
@@ -192,7 +192,7 @@ def get_bounding_box_multi_page(target_text: str, image: Image) -> List[List[int
                 if mod_text == mod_search_text:
                     x = ocr_text['left'][i]
                     y = ocr_text['top'][i]
-                    w = sum(ocr_text['width'][i:i+len(words)])
+                    w = sum(max(width, 0) for width in ocr_text['width'][i:i+len(words)])
                     h = max(ocr_text['height'][i:i+len(words)])
                     boxes.append([x + left, y + top, x + w + left, y + h + top])
 

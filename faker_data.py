@@ -71,13 +71,13 @@ def validate_address(address_line='single', wrong_state=False, pincode_length=5,
      # Generate the address line based on the input parameter
      # This Logic is Only valid for default Locale
     if address_line == 'single':
-        address = fake.street_address()
+        address = fake.street_address().replace('\n', ', ')
     elif address_line == 'double':
         address = f"{fake.secondary_address()} {fake.street_address()}"
     elif address_line == 'three':
-        address = f"{fake.building_number()} {fake.street_name()}\n{fake.secondary_address()}"
+        address = f"{fake.building_number()} {fake.street_name()}{fake.secondary_address()}"
     elif address_line == 'four':
-        address = f"{fake.building_number()} {fake.street_name()}\n{fake.secondary_address()}\n{fake.street_suffix()}"
+        address = f"{fake.building_number()} {fake.street_name()}{fake.secondary_address()}{fake.street_suffix()}"
     else:
         address = fake.address()
 
@@ -93,9 +93,9 @@ def validate_address(address_line='single', wrong_state=False, pincode_length=5,
     # Format the address data as a string and return it
     # Adjust for Pincode True or False
     if has_pincode:
-        address_data = f"{address}\n{state}, {pincode}"
+        address_data = f"{address}{state}, {pincode}"
     else:
-        address_data = f"{address}\n{state}"
+        address_data = f"{address}{state}"
     
     # print(re.sub(r"[\n\t\s]*", "", address_data))
 
@@ -117,7 +117,7 @@ def validate_ifsc_code(target_value, case="default"):
     has_special_characters = input_data['ifsc_code']['has_special_characters'][0]
     blank = input_data['ifsc_code']['blank'][0]
 
-    validated_ifsc_code = generate_ifsc(ifsc_code_length)
+    validated_ifsc_code = target_value
 
     if case == 'default':
         return validated_ifsc_code
